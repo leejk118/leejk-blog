@@ -1,0 +1,15 @@
+<!-- fragments/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <header>
+        <h1>Blog</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/post/list}">목록</a></li>
+                <li><a th:href="@{/post/add}">등록</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+</html>

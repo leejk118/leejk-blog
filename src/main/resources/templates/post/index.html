@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <h1>포스트 상세 페이지</h1>
+        <div class="post">
+            <h2 th:text="${post.title}">포스트 제목</h2>
+            <p th:text="${post.contents}">포스트 내용</p>
+            <p>작성일: <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}">날짜</span></p>
+            <a th:href="@{'/post/' + ${post.id} + '/edit'}" class="btn-edit">수정</a>
+        </div>
+    </div>
+</div>
+</html>

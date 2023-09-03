@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}">
+
+<div layout:fragment="content">
+    <div class="container">
+        <h1>포스트 목록</h1>
+
+        <!-- 포스트 목록 표시 -->
+        <div th:each="post : ${posts}" class="post-item">
+            <a th:href="@{'/post/' + ${post.id}}">
+                <div class="post-content">
+                    <div class="post-left">
+                        <span class="post-id"><span th:text="${post.id}">0</span></span>
+                    </div>
+                    <div class="post-right">
+                        <h3 th:text="${post.title}">제목</h3>
+                        <p th:text="${#strings.length(post.contents) < 100 ? post.contents : #strings.substring(post.contents, 0, 100) + '...'}">미리보기</p>
+                    </div>
+                    <div class="post-date">
+                        작성일: <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd')}">날짜</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- 페이징 링크 표시 -->
+        <div class="pagination">
+            <ul>
+                <li th:if="${page.hasPrevious()}">
+                    <a th:href="@{'/post/list?page=' + ${page.previousPageable().pageNumber}}">이전</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" th:class="${page.number == i} ? 'active'">
+                    <a th:href="@{'/post/list?page=' + ${i}}"><span th:text="${i + 1}">1</span></a>
+                </li>
+                <li th:if="${page.hasNext()}">
+                    <a th:href="@{'/post/list?page=' + ${page.nextPageable().pageNumber}}">다음</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</html>
