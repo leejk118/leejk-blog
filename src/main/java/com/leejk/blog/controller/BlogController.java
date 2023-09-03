@@ -9,7 +9,7 @@ public class BlogController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "redirect:/post/list";
     }
 
 }
